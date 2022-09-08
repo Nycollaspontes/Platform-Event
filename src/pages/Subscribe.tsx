@@ -1,17 +1,35 @@
-import { useState , FormEvent} from 'react'
+import { gql, useMutation } from '@apollo/client';
+import { useState, FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo'
 
-export default function Subscribe() {
-  
+const CREATE_SUBSCRIBER_MUTATION = gql`
+mutation CreateSubscriber($name : String! $email:String!) {
+  createSubscriber(data: {name: $name, email: $email}) {
+    id
+  }
+}
+`
 
+
+export default function Subscribe() {
+    
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [createSubscriber , {loading}] = useMutation(CREATE_SUBSCRIBER_MUTATION);
+    const navigate = useNavigate()
 
-function handleSubscribe(event:FormEvent ){
-    event.preventDefault();
+    async function handleSubscribe(event: FormEvent) {
+        event.preventDefault();
 
-    console.log(name , email)
-}
+       await createSubscriber({
+            variables: {
+                name,
+                email
+            }
+        })
+        navigate('/event')
+    }
 
     return (
         <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
@@ -41,7 +59,8 @@ function handleSubscribe(event:FormEvent ){
                             onChange={event => setEmail(event.target.value)} />
                         <button
                             type='submit'
-                            className='mt-4 bg-green-500 uppercase  py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors '>
+                            disabled={loading}
+                            className='mt-4 bg-green-500 uppercase  py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50 '>
                             Garantir minha vaga
                         </button>
                     </form>
@@ -51,3 +70,4 @@ function handleSubscribe(event:FormEvent ){
         </div>
     )
 }
+
