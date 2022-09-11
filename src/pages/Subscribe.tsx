@@ -1,4 +1,4 @@
-import { gql, useMutation, useSubscription } from '@apollo/client';
+import  homeImage from '../assets/Content.png'
 import { useState, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo'
@@ -57,7 +57,7 @@ export default function Subscribe() {
                     </form>
                 </div>
             </div>
-            <img src='src/assets/Content.png' alt="" className="" />
+            <img src={homeImage} alt="" className="" />
         </div>
     )
 }
