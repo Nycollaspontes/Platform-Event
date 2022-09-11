@@ -8,7 +8,7 @@ interface LessonProps {
     title: string;
     slug: string;
     availableAt: Date;
-    type: 'Live' | 'class';
+    lessonType: 'live' | 'class';
 }
 
 export function Lesson(props: LessonProps) {
@@ -41,7 +41,7 @@ export function Lesson(props: LessonProps) {
                             </span>
                         )}
                     <span className={`text-xs rounded py-[2px] px-2 border border-green-300 font-bold ${isActiveLesson ? 'text-white border-white' : ''}`}>
-                        {props.type === 'Live' ? 'AO VIVO' : 'AULA PRATICA'}
+                        {props.lessonType === 'live' ? 'AO VIVO' : 'AULA PRATICA'}
                     </span>
                 </header>
                 <strong className={`text-gray-200 mt-5 block ${isActiveLesson ? 'text-white' : ''}`}>

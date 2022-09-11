@@ -3,6 +3,7 @@ import { Lesson } from "./Lesson";
 
 export function Sidebar() {
     const { data } = useGetLessonsQuery()
+    console.log(data)
 
     return (
         <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600 ">
@@ -18,7 +19,7 @@ export function Sidebar() {
                             title={lesson.title}
                             slug={lesson.slug}
                             availableAt={new Date(lesson.availableAt)}
-                            type={lesson.lessonType}
+                            lessonType={lesson.lessonType}
                         />
                     )
                 })}
