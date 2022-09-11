@@ -5,16 +5,16 @@ import { Logo } from '../components/Logo'
 import { useCreateSubscriberMutation } from '../graphql/generated';
 
 export default function Subscribe() {
-    
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [createSubscriber , {loading}] = useCreateSubscriberMutation()
+    const [createSubscriber, { loading }] = useCreateSubscriberMutation()
     const navigate = useNavigate()
 
     async function handleSubscribe(event: FormEvent) {
         event.preventDefault();
 
-       await createSubscriber({
+        await createSubscriber({
             variables: {
                 name,
                 email
@@ -46,7 +46,7 @@ export default function Subscribe() {
                         <input
                             type="email"
                             placeholder='Digite seu Email'
-                            className='bg-gray-9`00 rounded px-5 h-14'
+                            className='bg-gray-900 rounded px-5 h-14'
                             onChange={event => setEmail(event.target.value)} />
                         <button
                             type='submit'
